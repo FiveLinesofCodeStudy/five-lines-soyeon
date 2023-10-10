@@ -112,12 +112,17 @@ function update() {
   }
 }
 
-function draw() {
+function createGraphics() {
   let canvas = document.getElementById("GameCanvas") as HTMLCanvasElement;
   let g = canvas.getContext("2d");
 
-  g.clearRect(0, 0, canvas.width, canvas.height);
+  g.clearRect(0, 0, canvas.width, canvas.height); //메서드 호출
+  return g;
+}
+function draw() {
+  let g = createGraphics();
 
+  //메서드 전달
   drawMap(g);
   drawPlayer(g);
 
