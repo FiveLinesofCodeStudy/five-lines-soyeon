@@ -17,35 +17,76 @@ enum Tile {
 enum RawInput {
   UP, DOWN, LEFT, RIGHT
 }
-interface Input2{
+interface Input{
   isRight():boolean;
   isLeft():boolean;
   isUp():boolean;
   isDown():boolean;
+  handle():void;
 }
-class Right implements Input2{
+class Right implements Input{
   isRight(): boolean {return true;}
   isLeft(): boolean {return false;}
   isDown(): boolean {return false;}
   isUp(): boolean {return false;}
+  handleInput(){
+    if (this.isLeft())
+      moveHorizontal(-1);
+    else if (this.isRight())
+      moveHorizontal(1);
+    else if (this.isUp())
+      moveVertical(-1);
+    else if (this.isDown())
+      moveVertical(1);
+  }
 }
-class Left implements Input2{
+class Left implements Input{
   isRight(): boolean {return false;}
   isLeft(): boolean {return true;}
   isDown(): boolean {return false;}
   isUp(): boolean {return false;}
+  handleInput(){
+    if (this.isLeft())
+      moveHorizontal(-1);
+    else if (this.isRight())
+      moveHorizontal(1);
+    else if (this.isUp())
+      moveVertical(-1);
+    else if (this.isDown())
+      moveVertical(1);
+  }
 }
-class Up implements Input2{
+class Up implements Input{
   isRight(): boolean {return false;}
   isLeft(): boolean {return false;}
   isDown(): boolean {return false;}
   isUp(): boolean {return true;}
+  handleInput(){
+    if (this.isLeft())
+      moveHorizontal(-1);
+    else if (this.isRight())
+      moveHorizontal(1);
+    else if (this.isUp())
+      moveVertical(-1);
+    else if (this.isDown())
+      moveVertical(1);
+  }
 }
-class Down implements Input2{
+class Down implements Input{
   isRight(): boolean {return false;}
   isLeft(): boolean {return false;}
   isDown(): boolean {return true;}
   isUp(): boolean {return false;}
+  handleInput(){
+    if (this.isLeft())
+      moveHorizontal(-1);
+    else if (this.isRight())
+      moveHorizontal(1);
+    else if (this.isUp())
+      moveVertical(-1);
+    else if (this.isDown())
+      moveVertical(1);
+  }
 }
 
 let playerx = 1;
@@ -119,16 +160,6 @@ function handleInputs(){
     let current = inputs.pop();
     handleInput(current);
   }
-}
-function handleInput(input:Input2){
-  if (input.isLeft())
-    moveHorizontal(-1);
-  else if (input.isRight())
-    moveHorizontal(1);
-  else if (input.isUp())
-    moveVertical(-1);
-  else if (input.isDown())
-    moveVertical(1);
 }
 function updateMap(){
   for (let y = map.length - 1; y >= 0; y--) {
