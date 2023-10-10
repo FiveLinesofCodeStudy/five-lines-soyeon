@@ -1,28 +1,32 @@
-# five-lines
+FiveLinesofCodeStudy
+======
+### 📢 BOOK
+![image](https://github.com/FiveLinesofCodeStudy/docs/assets/62527898/65622139-a06d-4e66-b046-ca4efac1e234)
 
-In this kata your task is to refactor the code for a small game. When finished it should be easy to add new tile types, or make the key draw as a circle, so we can easily distinguish it from the lock. 
 
-The code already abides by the most common principles "Don't Repeat Yourself", "Keep It Simple, Stupid", and there are only very few magic literals. There are no poorly structured nor deeply nested `if`s.
+*" 파이브 라인스 오브 코드 - 다섯 줄 제한 규칙으로 시작하는 체계적이고 효과적인 리팩터링 수련법 "*  <br/>
+*크리스찬 클라우젠 (지은이) | 김성원 (옮긴이) | 위키북스*  
+</br></br>
 
-This is *not* an easy exercise.
+### 📢 RULE
+- 어떤 내용에 이런 느낀점
+- 코드 리팩토링 -> 변경 전/후 확인
 
-# About the Game
-In the game, you are a red square and have to get the box (brown) to the lower right corner. Obstacles include falling stones (blue), walls (gray), and a lock (yellow, right) that can be unlocked with the key (yellow, left). You can push one stone or box at a time, and only if it is not falling. The flux (greenish) holds up boxes and stones but can be 'eaten' by the player. 
 
-![Screenshot of the game](game.png)
+</br></br>
 
-# How to Build It
-Assuming that you have the Typescript compiler installed: Open a terminal in this directory, then run `tsc`. There should now be a `index.js` file in this directory.
+### 📢 TIMETABLE
+#### 화요일
+- 느낀점, 본인이 리팩토링한 부분 서로 공유하기
+- 각자의 후기
+- 코드로 작성해보기
+- 내용정리보다는 느낀점, 배운 점 위주로
+</br></br>
 
-# How to Run It
-To run the game you need to first build it, see above. Then simply open `index.html` in a browser. Use the arrows to move the player.
+### 📢 STUDY REPORT
 
-# Thank You!
-If you like this kata please consider giving the repo a star. You might also consider purchasing a copy of my book where I show a simple way to tackle code like this: [Five Lines of Code](https://www.manning.com/books/five-lines-of-code), available through the Manning Early Access Program.
 
-[![Five Lines of Code](frontpage.png)](https://www.manning.com/books/five-lines-of-code)
+</br></br>
 
-If you have feedback or comments on this repo don't hesitate to write me a message or send me a pull request. 
-
-Thank you for checking it out.
-
+### 📢 MEMBER  
+want, mimi, uuugin, kim-boring, pure-gramer
