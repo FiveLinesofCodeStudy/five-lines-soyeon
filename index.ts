@@ -30,14 +30,7 @@ class Right implements Input{
   isDown(): boolean {return false;}
   isUp(): boolean {return false;}
   handleInput(){
-    if (this.isLeft())
-      moveHorizontal(-1);
-    else if (this.isRight())
       moveHorizontal(1);
-    else if (this.isUp())
-      moveVertical(-1);
-    else if (this.isDown())
-      moveVertical(1);
   }
 }
 class Left implements Input{
@@ -46,14 +39,7 @@ class Left implements Input{
   isDown(): boolean {return false;}
   isUp(): boolean {return false;}
   handleInput(){
-    if (this.isLeft())
       moveHorizontal(-1);
-    else if (this.isRight())
-      moveHorizontal(1);
-    else if (this.isUp())
-      moveVertical(-1);
-    else if (this.isDown())
-      moveVertical(1);
   }
 }
 class Up implements Input{
@@ -62,14 +48,7 @@ class Up implements Input{
   isDown(): boolean {return false;}
   isUp(): boolean {return true;}
   handleInput(){
-    if (this.isLeft())
-      moveHorizontal(-1);
-    else if (this.isRight())
-      moveHorizontal(1);
-    else if (this.isUp())
       moveVertical(-1);
-    else if (this.isDown())
-      moveVertical(1);
   }
 }
 class Down implements Input{
@@ -78,13 +57,6 @@ class Down implements Input{
   isDown(): boolean {return true;}
   isUp(): boolean {return false;}
   handleInput(){
-    if (this.isLeft())
-      moveHorizontal(-1);
-    else if (this.isRight())
-      moveHorizontal(1);
-    else if (this.isUp())
-      moveVertical(-1);
-    else if (this.isDown())
       moveVertical(1);
   }
 }
