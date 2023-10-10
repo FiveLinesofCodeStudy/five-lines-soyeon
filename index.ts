@@ -29,36 +29,28 @@ class Right implements Input{
   isLeft(): boolean {return false;}
   isDown(): boolean {return false;}
   isUp(): boolean {return false;}
-  handleInput(){
-      moveHorizontal(1);
-  }
+  handle(){moveHorizontal(1);}
 }
 class Left implements Input{
   isRight(): boolean {return false;}
   isLeft(): boolean {return true;}
   isDown(): boolean {return false;}
   isUp(): boolean {return false;}
-  handleInput(){
-      moveHorizontal(-1);
-  }
+  handle(){moveHorizontal(-1);}
 }
 class Up implements Input{
   isRight(): boolean {return false;}
   isLeft(): boolean {return false;}
   isDown(): boolean {return false;}
   isUp(): boolean {return true;}
-  handleInput(){
-      moveVertical(-1);
-  }
+  handle(){moveVertical(-1);}
 }
 class Down implements Input{
   isRight(): boolean {return false;}
   isLeft(): boolean {return false;}
   isDown(): boolean {return true;}
   isUp(): boolean {return false;}
-  handleInput(){
-      moveVertical(1);
-  }
+  handle(){moveVertical(1);}
 }
 
 let playerx = 1;
@@ -72,7 +64,7 @@ let map: Tile[][] = [
   [2, 2, 2, 2, 2, 2, 2, 2],
 ];
 
-let inputs: Input2[] = [];
+let inputs: Input[] = [];
 
 function remove(tile: Tile) {
   for (let y = 0; y < map.length; y++) {
