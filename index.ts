@@ -17,11 +17,13 @@ enum RawTile {
 enum RawInput {
   UP, DOWN, LEFT, RIGHT
 }
-function assertExhausted(x: RawTile):never { //항상 오류를 출력하거나 리턴 값을 절대로 내보내지 않는 리턴값
+function assertExhausted(x: never):never { //항상 오류를 출력하거나 리턴 값을 절대로 내보내지 않는 리턴값
   throw new Error("Unedpected object : " + x);
 }
 function transformTile(tile: RawTile){
   switch (tile){
+    case RawTile.BOX: return new Box();
+    case RawTile.FALLING_BOX: return new FallingBox();
     case RawTile.AIR: return new Air();
     case RawTile.PLAYER: return new Player();
     case RawTile.UNBREAKABLE: return new Unbreakable();
@@ -65,6 +67,7 @@ interface Tile{
   isLock2(): boolean;
   draw(g:CanvasRenderingContext2D,x:number,y:number): void;
   moveHorizontal(dx:number):void;
+  moveVertical(dy:number):void;
 }
 class Air implements Tile{
   isAir(): boolean {return true;}
@@ -81,6 +84,9 @@ class Air implements Tile{
   moveHorizontal(dx:number){
     moveToTile(playerx+dx, playery);
   }
+  moveVertical(dy: number) {
+    moveToTile(playerx, playery + dy);
+  }
 }
 class Player implements Tile{
   isAir(): boolean {return true;}
@@ -95,6 +101,7 @@ class Player implements Tile{
   isStone(): boolean{return false;}
   draw(g: CanvasRenderingContext2D, x: number, y: number) {}
   moveHorizontal(dx: number) {}
+  moveVertical(dy:number){}
 }
 class Flux implements Tile{
   isAir(): boolean {return false;}
@@ -114,6 +121,9 @@ class Flux implements Tile{
   moveHorizontal(dx:number){
     moveToTile(playerx+dx, playery);
   }
+  moveVertical(dy: number) {
+    moveToTile(playerx, playery + dy);
+  }
 }
 class Unbreakable implements Tile{
   isAir(): boolean {return false;}
@@ -131,6 +141,7 @@ class Unbreakable implements Tile{
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }
   moveHorizontal(dx: number) {}
+  moveVertical(dy:number){}
 }
 class Stone implements Tile{
   isAir(): boolean {return false;}
@@ -152,6 +163,7 @@ class Stone implements Tile{
       map[playery][playerx + dx + dx] = this;
     }
   }
+  moveVertical(dy:number){}
 }
 class FallingStone implements Tile{
   isAir(): boolean {return false;}
@@ -169,6 +181,7 @@ class FallingStone implements Tile{
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }
   moveHorizontal(dx: number) {}
+  moveVertical(dy:number){}
 }
 class Box implements Tile{
   isAir(): boolean {return false;}
@@ -190,6 +203,7 @@ class Box implements Tile{
       map[playery][playerx + dx + dx] = this;
     }
   }
+  moveVertical(dy:number){}
 }
 class FallingBox implements Tile{
   isAir(): boolean {return false;}
@@ -207,6 +221,7 @@ class FallingBox implements Tile{
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }
   moveHorizontal(dx: number) {}
+  moveVertical(dy:number){}
 }
 class Key1 implements Tile{
   isAir(): boolean {return false;}
@@ -226,6 +241,10 @@ class Key1 implements Tile{
   moveHorizontal(dx: number) {
     removeLock1();
     moveToTile(playerx + dx, playery);
+  }
+  moveVertical(dy: number) {
+    removeLock1();
+    moveToTile(playerx, playery + dy);
   }
 }
 class Key2 implements Tile{
@@ -247,6 +266,10 @@ class Key2 implements Tile{
     removeLock2();
     moveToTile(playerx + dx, playery);
   }
+  moveVertical(dy: number) {
+    removeLock2();
+    moveToTile(playerx, playery + dy);
+  }
 }
 class Lock1 implements Tile{
   isAir(): boolean {return false;}
@@ -264,6 +287,7 @@ class Lock1 implements Tile{
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }
   moveHorizontal(dx: number) {}
+  moveVertical(dy:number){}
 }
 class Lock2 implements Tile{
   isAir(): boolean {return false;}
@@ -281,6 +305,7 @@ class Lock2 implements Tile{
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }
   moveHorizontal(dx: number) {}
+  moveVertical(dy:number){}
 }
 
 class Right implements Input{
@@ -339,18 +364,9 @@ function moveToTile(newx: number, newy: number) {
 function moveHorizontal(dx: number) {
   map[playery][playerx+dx].moveHorizontal(dx);
 }
-
+//TODO: 얘를 없애기
 function moveVertical(dy: number) {
-  if (map[playery + dy][playerx].isFlux()
-    || map[playery + dy][playerx].isAir()) {
-    moveToTile(playerx, playery + dy);
-  } else if (map[playery + dy][playerx].isKey1()) {
-    removeLock1();
-    moveToTile(playerx, playery + dy);
-  } else if (map[playery + dy][playerx].isKey2()) {
-    removeLock2();
-    moveToTile(playerx, playery + dy);
-  }
+  map[playery+dy][playerx].moveVertical(dy);
 }
 
 function update() {
